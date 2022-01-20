@@ -8,8 +8,9 @@ jobs:
     steps:
       - name: Tar
         run: |
+          pwd
           mkdir ../build
-          cp -TR . ../build
+          cp -T main.py ../build
           tar -cvf deploy.tar ../build/
       - name:
         uses: appleboy/scp-action@master
@@ -19,4 +20,4 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           source: "deploy.tar"
-          target: "/root/ShoppingListGenerator/main.py"
+          target: "/root/ShoppingListGenerator"

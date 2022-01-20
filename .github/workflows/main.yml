@@ -13,7 +13,7 @@ jobs:
           mkdir ../build
           cp -TR . ../build
           tar -cvf deploy.tar ../build/
-      - name:
+      - name: SCP
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -22,3 +22,17 @@ jobs:
           port: ${{ secrets.PORT }}
           source: "deploy.tar"
           target: "/root/ShoppingListGenerator"
+      - name: Cleanup
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /root/ShoppingListGenerator
+            rm main.py
+            tar -xf deploy.tar
+            rm deploy.tar
+            mv build/main.py main.py
+            rm -r build

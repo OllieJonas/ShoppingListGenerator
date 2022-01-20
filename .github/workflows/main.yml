@@ -10,7 +10,7 @@ jobs:
         run: |
           pwd
           mkdir ../build
-          cp -T main.py ../build
+          cp -TR . ../build
           tar -cvf deploy.tar ../build/
       - name:
         uses: appleboy/scp-action@master

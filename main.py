@@ -244,6 +244,9 @@ def main():
     - Sambal 15ml X
     - You can add a ? to signify you want to add this to a "Maybe" section in the shopping list. For example:
     - Dark Soy Sauce 15ml ?
+
+    ===== BUGS =====
+    - decimals don't work
     """
     args = sys.argv[1:]
     if len(args) != 1:

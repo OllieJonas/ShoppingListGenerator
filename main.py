@@ -178,7 +178,9 @@ def create_shopping_lists(days_split, days_meals_dict, recipe_ingredients_dict):
     shopping_lists = {"Maybe": {}}
 
     def add_to_maybe(ingr: Ingredient, start_date: str):
-        ingr.name += f' ({start_date})'
+        date_str = f' ({start_date})'
+        if date_str not in ingr.name:
+            ingr.name += date_str
         add(shopping_lists["Maybe"], ingr)
 
     def add(d: dict, ingr: Ingredient):

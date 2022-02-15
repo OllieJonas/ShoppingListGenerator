@@ -330,6 +330,9 @@ def main():
 
         shopping_list_sections = [s for s in all_sections if s.project_id == shopping_list_project_id]
 
+        # Deletes all date sections (useful for if changing shopping dates)
+        [api.delete_section(section_id=s.id) for s in shopping_list_sections if s.name in days]
+
         # TODO: Use sync API for deleting and creating tasks: https://developer.todoist.com/sync/v8/#overview
         for section_name, items in shopping_lists.items():
             if not any(s.name == section_name for s in shopping_list_sections):
